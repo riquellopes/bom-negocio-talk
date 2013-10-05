@@ -50,7 +50,12 @@ class BomNegocio(object):
 					"type":li.find('div', 'col_2').find('div', 'info').find_all('p','text')[1].get_text().strip(), 
 					"url":li.a['href']}
 			response = response + (iten,)
-		return response
+		self.response = response
+		return self
+	
+	def get_response(self):
+		return self.response
+		
 if __name__ == '__main__':
 	import doctest
 	doctest.testmod()
