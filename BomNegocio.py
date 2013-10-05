@@ -1,5 +1,5 @@
 # coding: utf-8
-import urllib2
+import urllib
 from bs4 import BeautifulSoup
 
 class BomNegocio(object):
@@ -35,7 +35,7 @@ class BomNegocio(object):
 		"""
 			Método realiza busca das informações desejadas::
 		"""
-		html_bom_negocio = urllib2.urlopen(q).read()
+		html_bom_negocio = urllib.urlopen(q).read()
 		soup = BeautifulSoup(html_bom_negocio)
 		
 		for li in soup.find_all('li', 'list_adsBN_item'):
@@ -50,12 +50,19 @@ class BomNegocio(object):
 					"type":li.find('div', 'col_2').find('div', 'info').find_all('p','text')[1].get_text().strip(), 
 					"url":li.a['href']}
 			response = response + (iten,)
-		self.response = response
+			self.response=response
 		return self
 	
 	def get_response(self):
 		return self.response
-		
+	
+	def sort(self, alg=None):
+		reverse=alg=='price_max'
+		def getKey(item):
+			return item['price']
+		self.response=sorted(self.response, key=getKey, reverse=reverse)
+		return self
+
 if __name__ == '__main__':
-	import doctest
-	doctest.testmod()
+	bom = BomNegocio(BomNegocio.RJ, BomNegocio.INSTRUMENTOS_MUSICAIS)
+	print bom.find(q='yamaha trb').get_response()
