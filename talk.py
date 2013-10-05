@@ -1,8 +1,4 @@
-#!/usr/bin/python
-"""
-	A lib funciona da seguinte forma, as regex devem ser escritas como um
-	comentario, e o metodo deve possui o prefixo command_::
-"""
+# coding: utf-8
 from lib.PyGtalkRobot import GtalkRobot, xmpp
 from BomNegocio import *
 
@@ -14,9 +10,13 @@ class BomNegocioBot(GtalkRobot):
 		
 	def command_003_search(self, user, msg, args):
 		"""(search)( +(.*))?$(?i)"""
-		response = self.b.find(q=args[1]).sort()
-		print len(response.get_response())
-		self.replyMessage(user, "http://gmail.com")
+		responses=self.b.find(q=args[1]).sort().get_response()[:5]
+		message=""
+		## Lista apenas os 5 primeiros recuperados::
+		for r in responses:
+			message += "Preço: %s - Link: %s\n" % (r['price'], r['url'])
+		print message
+		self.replyMessage(user, message)
 	
 #	def sendFile(path=None):
 #		ibb=xmpp.filetransfer.IBB()
