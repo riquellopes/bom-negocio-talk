@@ -24,4 +24,4 @@ python talsk.py
 
 Como realizar uma busca:
 --------------
-![alt text](https://github.com/riquellopes/bom-negocio-talk/adium.png "Tela do Adium")
+![alt text](https://github.com/riquellopes/bom-negocio-talk/blob/master/adium.png "Tela do Adium")
