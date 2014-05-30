@@ -12,7 +12,7 @@ Configuração:
 
 ```python
 bot = BomNegocioBot()
-bot.setState('available', "escreve aqui o seu status.")
+bot.setState('available', "escreva aqui o seu status.")
 bot.start('user@gmail.com', 'password')
 ```
 
