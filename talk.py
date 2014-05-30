@@ -2,6 +2,12 @@
 from lib.PyGtalkRobot import GtalkRobot, xmpp
 from BomNegocio import *
 
+try:
+	from local_conf import user, pasw
+except ImportError:
+	user = None
+	pasw = None
+	
 class BomNegocioBot(GtalkRobot):
 	
 	def __init__(self, **kwargs):
@@ -11,20 +17,14 @@ class BomNegocioBot(GtalkRobot):
 	def command_003_search(self, user, msg, args):
 		"""(search)( +(.*))?$(?i)"""
 		responses=self.b.find(q=args[1]).sort().get_response()[:5]
-		message=""
+		message=[]
 		## Lista apenas os 5 primeiros recuperados::
 		for r in responses:
-			message += "Preço: %s - Link: %s\n" % (r['price'], r['url'])
-		print message
+			message.append( "Titulo: {0} - Preço: {1}\nLink: {2}".format(r['title'].encode('utf-8').strip(), r['price'], r['url']) )
+		message = "\n\n".join(message)
 		self.replyMessage(user, message)
-	
-#	def sendFile(path=None):
-#		ibb=xmpp.filetransfer.IBB()
-#		ibb.PlugIn(self.conn)
-#		with file(path) as _file:
-#			ibb.OpenStream('Nome', "email", _file)
 			
 if __name__ == '__main__':
 	bot = BomNegocioBot()
 	bot.setState('available', "TestBot")
-	bot.start("riquellopes@gmail.com", "052020266")
+	bot.start(user, pasw)

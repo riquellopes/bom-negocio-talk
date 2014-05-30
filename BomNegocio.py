@@ -35,19 +35,16 @@ class BomNegocio(object):
 		"""
 			Método realiza busca das informações desejadas::
 		"""
-		html_bom_negocio = urllib.urlopen(q).read()
-		soup = BeautifulSoup(html_bom_negocio)
+		soup = BeautifulSoup(urllib.urlopen(q).read())
 		
 		for li in soup.find_all('li', 'list_adsBN_item'):
 			try:
 				price = li.find('p', 'price').get_text().strip()
 			except:
 				price = '0,00'
+			
 			iten = {'title':li.h3.a.get_text(), 
-					'price':price, 
-					"publicated":li.find('div', 'col_4').get_text(), 
-					"state":li.find('div', 'col_2').find('div', 'info').find_all('p','text')[0].get_text().strip(), 
-					"type":li.find('div', 'col_2').find('div', 'info').find_all('p','text')[1].get_text().strip(), 
+					'price':price,
 					"url":li.a['href']}
 			response = response + (iten,)
 			self.response=response

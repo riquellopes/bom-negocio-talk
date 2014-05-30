@@ -7,7 +7,7 @@ from mock import patch, Mock
 from nose.tools import assert_true, assert_equals
 from BomNegocio import *
 
-class MockUrllib(Mock):
+class MockUrllib(object):
 	
 	def __init__(self, file_test):
 		self.file_test = path.join(PROJECT_ROOT, file_test)
@@ -47,13 +47,13 @@ class BomNegocioTest(unittest.TestCase):
 		
 	@patch('BomNegocio.urllib.urlopen')
 	def test_caso_o_parametro_Q_possua_uma_palavra_chave_ele_deve_realizar_uma_busca_pela_palavra(self ,url):
-		url.return_value = MockUrllib('busca_trb.html')
+		url.return_value = MockUrllib('baixo_trb.html')
 		b = BomNegocio(BomNegocio.RJ, BomNegocio.INSTRUMENTOS_MUSICAIS)
 		find = b.find(q='yamaha trb').get_response()
-		assert_equals(len(find), 3)
+		assert_equals(len(find), 2)
 		assert_equals(b.query, 'yamaha+trb')
-		assert_equals(find[0]['title'], u'Baixo Yamaha TRB 1005 zero')
-		assert_equals(find[0]['price'], u'R$ 3.500')
+		assert_equals(find[0]['title'], u'Baixo cort b5 opn')
+		assert_equals(find[0]['price'], u'R$ 1.300')
 	
 	@patch('BomNegocio.urllib.urlopen')
 	def test_o_resultado_recuperado_pode_ser_reorndenado(self ,url):
