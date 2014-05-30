@@ -19,7 +19,7 @@ bot.start('user@gmail.com', 'password')
 Como executar:
 --------------
 ```sh
-python talsk.py
+python talk.py
 ```
 
 Como realizar uma busca:
