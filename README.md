@@ -1,4 +1,4 @@
-BomNegocio Talk:
+BomNegócio Talk:
 =========
 
 Integra o gtalk ao site de classificados bom negócio.
