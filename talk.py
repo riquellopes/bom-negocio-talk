@@ -12,7 +12,7 @@ class BomNegocioBot(GtalkRobot):
 	
 	def __init__(self, **kwargs):
 		GtalkRobot.__init__(self, **kwargs)
-		self.b = BomNegocio(BomNegocio.RJ, BomNegocio.INSTRUMENTOS_MUSICAIS)
+		self.b = BomNegocio(BOM_NEGOCIO_CIDADE.RJ, BOM_NEGOCIO_CATEGORIA.INSTRUMENTOS_MUSICAIS)
 		
 	def command_003_search(self, user, msg, args):
 		"""(search)( +(.*))?$(?i)"""

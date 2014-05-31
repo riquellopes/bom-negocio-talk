@@ -77,7 +77,7 @@ class BomNegocioTest(unittest.TestCase):
 			def call_me(self, q):
 				return q
 		
-		m = Mock(BOM_NEGOCIO_CIDADE.RJ, BOM_NEGOCIO_CATEGORIA.INSTRUMENTOS_MUSICAIS)		
+		m = Mock(BOM_NEGOCIO_CIDADE.RJ, BOM_NEGOCIO_CATEGORIA.INSTRUMENTOS_MUSICAIS)	
 		assert_equals(m.call_me(q="yamaha trb"), "http://rj.bomnegocio.com/instrumentos-musicais?q=yamaha+trb")
 		assert_equals(m.call_me(q="fender"), "http://rj.bomnegocio.com/instrumentos-musicais?q=fender")
 		assert_equals(m.call_me(q="açai"), "http://rj.bomnegocio.com/instrumentos-musicais?q=açai")
