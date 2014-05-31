@@ -20,6 +20,8 @@ Como executar:
 --------------
 ```sh
 python talk.py
+Digite seu gmail: user@gmail.com
+Digite sua senha: ************
 ```
 
 Como realizar uma busca:

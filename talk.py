@@ -1,12 +1,6 @@
 # coding: utf-8
 from lib.PyGtalkRobot import GtalkRobot, xmpp
 from BomNegocio import *
-
-try:
-	from local_conf import user, pasw
-except ImportError:
-	user = None
-	pasw = None
 	
 class BomNegocioBot(GtalkRobot):
 	
@@ -25,6 +19,10 @@ class BomNegocioBot(GtalkRobot):
 		self.replyMessage(user, message)
 			
 if __name__ == '__main__':
+	import getpass
+	user = raw_input("Digite seu gmail: ")
+	pasw = getpass.getpass("Digite sua senha: ")
+	
 	bot = BomNegocioBot()
 	bot.setState('available', "TestBot")
 	bot.start(user, pasw)
