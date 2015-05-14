@@ -1,7 +1,7 @@
-BomNegócio Talk:
+Olx Talk:
 =========
 
-Integra o gtalk ao site de classificados bom negócio.
+Integra o gtalk ao site de classificados olx.
 
 
 O objectivo desse projeto é unir duas das ferramentas que eu utilizo quase todos os dias.
@@ -11,7 +11,7 @@ Configuração:
 --------------
 
 ```python
-bot = BomNegocioBot()
+bot = OlxBot()
 bot.setState('available', "escreva aqui o seu status.")
 bot.start('user@gmail.com', 'password')
 ```
