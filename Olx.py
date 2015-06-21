@@ -24,9 +24,9 @@ def query_string(func):
 
         if q is not None:
             self.query = q.replace(' ', '+').strip()
-            url = "%s?q=%s" % (self.url, self.query)
+            url = "{0}?q={1}".format(self.url, self.query)
         else:
-            raise OlxException("Nenhum valor foi passado para o Olx.")
+            url = self.url
         return func(self, q=url)
     return wrapper
 
@@ -90,6 +90,7 @@ class OlxApi(object):
     def __init__(self, cidade, categoria):
         self.cidade = cidade
         self.categoria = categoria
+        self.response = ()
 
     @property
     def url(self):
@@ -100,59 +101,36 @@ class OlxApi(object):
         """
             Método realiza busca das informações desejadas.
         """
-        self.response = ()
-        response = self.response
         r = requests.request("GET", q)
+        if r.status_code != 200:
+            raise OlxException()
         soup = BeautifulSoup(r.content)
 
         for li in soup.find('div', 'section_OLXad-list').find_all('li', 'item'):
-            try:
-                price = li.find('p', 'OLXad-list-price').get_text().strip()
-            except:
-                price = 'R$ 0,00'
-            title = li.find('h3', 'OLXad-list-title').get_text().strip()
-            iten = {'title': title,
-                    'thumb': "",
-                    'published': "",
-                    'location': "",
-                    'price': price,
-                    'url': li.a.get('href')}
-            response = response + (iten,)
-            self.response = response
+            iten = self._extract(li)
+            self.response = self.response + (iten,)
         return self
 
-    def _extract_one(self, content):
+    def _extract(self, content):
         """
-            Método extra as informações desejadas do elemento html.
+            Método extrai as informações desejadas do elemento html.
         """
         iten = {
             "title": "",
             "published": "",
             "location": "",
-            "price": "",
+            "price": "R$ 0,00",
             "url": "",
         }
-        extract_itens['price'] = 'R$ 0,00'
-        extract_itens['url'] = content.a.get('href')
-        extract_itens['title'] = content.find('h3', 'OLXad-list-title')\
+        iten['url'] = content.a.get('href')
+        iten['title'] = content.find('h3', 'OLXad-list-title')\
             .get_text().strip()
         try:
-            extract_itens['price'] = content.find('p', 'OLXad-list-price')\
+            iten['price'] = content.find('p', 'OLXad-list-price')\
                 .get_text().strip()
         except:
             pass
-        return iten.update(extract_itens or {})
-
-    def get_response(self):
-        return self.response
-
-    def sort(self, alg=None):
-        reverse = alg == 'price_max'
-
-        def getKey(item):
-            return item['price']
-        self.response = sorted(self.response, key=getKey, reverse=reverse)
-        return self
+        return iten
 
 if __name__ == '__main__':
     bom = OlxApi(CITY_OLX.RJ, CATEGORY_OLX.INSTRUMENTOS_MUSICAIS)
