@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import requests
+from slugify import slugify
 from functools import wraps
 from bs4 import BeautifulSoup
 
@@ -12,7 +13,7 @@ class OlxException(Exception):
 def query_string(func):
     """
         Antes que o método find seja invocado, o decorador verifica
-        se a variavel 'q' possui algum valor definido::
+        se a variavel 'q' possui algum valor definido.
     """
     @wraps(func)
     def wrapper(self, *args, **kwargs):
@@ -32,9 +33,15 @@ def query_string(func):
 
 class OlxList(list):
 
-    def __init__(self, **kwargs):
+    def __init__(self, *args, **kwargs):
+        for value in args:
+            self.append({self._padronizar(value): value})
+
         for k in kwargs:
             self.append({k.upper(): kwargs[k]})
+
+    def _padronizar(self, value):
+        return slugify(value, separator='_').upper()
 
     def __getattr__(self, name):
         for l in self:
@@ -45,23 +52,23 @@ class OlxList(list):
         raise IndexError("")
 
 CITY_OLX = OlxList(
-    RJ='rj',
-    SP='sp',
-    RR='rr',
-    AM='am',
-    AC='ac',
-    RO='ro',
-    MT='mt',
-    GO='go',
-    TO='to',
-    BA='ba',
-    ES='es',
-    SE='se',
-    AL='al',
-    RN='rn',
-    PB='pb',
-    MA='ma',
-    PR='pr',
+    'rj',
+    'sp',
+    'rr',
+    'am',
+    'ac',
+    'ro',
+    'mt',
+    'go',
+    'to',
+    'ba',
+    'es',
+    'se',
+    'al',
+    'rn',
+    'pb',
+    'ma',
+    'pr',
 )
 
 CATEGORY_OLX = OlxList(
@@ -91,7 +98,7 @@ class OlxApi(object):
     @query_string
     def find(self, q=None):
         """
-            Método realiza busca das informações desejadas::
+            Método realiza busca das informações desejadas.
         """
         self.response = ()
         response = self.response
@@ -103,7 +110,8 @@ class OlxApi(object):
                 price = li.find('p', 'OLXad-list-price').get_text().strip()
             except:
                 price = 'R$ 0,00'
-            iten = {'title': li.find('h3', 'OLXad-list-title').get_text().strip(),
+            title = li.find('h3', 'OLXad-list-title').get_text().strip()
+            iten = {'title': title,
                     'thumb': "",
                     'published': "",
                     'location': "",
