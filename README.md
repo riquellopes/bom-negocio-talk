@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/riquellopes/bom-negocio-talk.svg)](https://travis-ci.org/riquellopes/bom-negocio-talk)
 Olx Talk:
 =========
 
