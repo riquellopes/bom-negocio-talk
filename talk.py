@@ -27,5 +27,5 @@ if __name__ == "__main__":
     pasw = getpass.getpass("Digite sua senha: ")
 
     bot = OlxBot()
-    bot.setState('available', "TestBot")
+    bot.setState('available', "Busca OLX")
     bot.start(user, pasw)
