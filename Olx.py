@@ -102,7 +102,7 @@ class OlxApi(object):
         """
         r = requests.request("GET", q)
         if r.status_code != 200:
-            raise OlxException()
+            raise OlxException(r.status_code)
         soup = BeautifulSoup(r.content)
 
         for li in soup.find('div', 'section_OLXad-list').find_all('li', 'item'):
@@ -132,5 +132,8 @@ class OlxApi(object):
         return iten
 
 if __name__ == '__main__':
-    bom = OlxApi(CITY_OLX.RJ, CATEGORY_OLX.INSTRUMENTOS_MUSICAIS)
-    print bom.find(q='yamaha trb').response
+    olx = OlxApi(CITY_OLX.RJ, CATEGORY_OLX.INSTRUMENTOS_MUSICAIS)
+    try:
+        print olx.find(q='fender').response
+    except OlxException as e:
+        print "Error", e
