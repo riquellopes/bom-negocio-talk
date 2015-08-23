@@ -1,5 +1,4 @@
 # coding: utf-8
-
 import requests
 from slugify import slugify
 from functools import wraps
