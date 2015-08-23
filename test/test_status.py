@@ -3,7 +3,7 @@
 import unittest
 import responses
 from nose.tools import assert_raises
-from olx import OlxApi, CITY_OLX, CATEGORY_OLX, OlxException
+from Olx import OlxApi, CITY_OLX, CATEGORY_OLX, OlxException
 
 
 class TestStatus(unittest.TestCase):

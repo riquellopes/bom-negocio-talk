@@ -5,7 +5,7 @@ PROJECT_ROOT = path.abspath(path.dirname(__file__))
 import unittest
 import responses
 from nose.tools import assert_equals
-from olx import OlxApi, CITY_OLX, CATEGORY_OLX, query_string
+from Olx import OlxApi, CITY_OLX, CATEGORY_OLX, query_string
 
 
 class MockResponse(object):
