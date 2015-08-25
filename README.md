@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/riquellopes/bom-negocio-talk.svg)](https://travis-ci.org/riquellopes/bom-negocio-talk)
+[![Coverage Status](https://coveralls.io/repos/riquellopes/bom-negocio-talk/badge.svg?branch=master&service=github)](https://coveralls.io/github/riquellopes/bom-negocio-talk?branch=master)
+
 Olx Talk:
 =========
 
