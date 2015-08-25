@@ -28,3 +28,8 @@ Digite sua senha: ************
 Como realizar uma busca:
 --------------
 ![alt text](https://raw.githubusercontent.com/riquellopes/bom-negocio-talk/master/adium.png "Tela do Adium")
+
+Observação:
+----------
+
+Nessa primeira versão, apenas as buscas para instrumentos musicais vão funcionar.
