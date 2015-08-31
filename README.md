@@ -36,3 +36,7 @@ Observação:
 ----------
 
 Nessa primeira versão, apenas as buscas para instrumentos musicais vão funcionar.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/riquellopes/bom-negocio-talk/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
