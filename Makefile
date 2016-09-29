@@ -1,12 +1,14 @@
+.SILENT:
+
 help:
 	@echo "Como usar make <option>"
 	@echo ""
 	@echo "Opções:"
 	@echo " run"
-	@echo " test_app"
+	@echo " tests"
 
 run:
-	@python talk.py
+	python talk.py
 
-test_app:
-	@nosetests --with-coverage test/
+tests:
+	nosetests --with-coverage test/

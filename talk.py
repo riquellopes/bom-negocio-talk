@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 from lib.PyGtalkRobot import GtalkRobot
-from Olx import OlxApi, CITY_OLX, CATEGORY_OLX
+from olx import OlxApi, CITY_OLX, CATEGORY_OLX
 
 
 class OlxBot(GtalkRobot):
